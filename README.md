@@ -7,6 +7,12 @@ Youtube video link to be provided soon.
 ## What it does
 Automates volume farming on Hyperliquid to reach **100,000 USDC traded volume**. Once the target is reached (or the API check fails), the bot **halts automatically**.
 
+## Why it matters
+🎯 **WHY IS THIS IMPORTANT?**  
+✅ Unlocks sub-accounts on Hyperliquid  
+✅ Grants “institutional” status on Liminal for Delta Neutral (positions executed on your account)  
+✅ Increases your chances for a future Hyperliquid airdrop and potentially other ecosystem projects  
+
 ## How it works (very short)
 - Trades **PAXG/USDC Perp** with **limit orders only** (maker fees).
 - Uses **5x leverage**, then **2x** when total volume ≥ **95k** to avoid overshooting.
