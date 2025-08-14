@@ -23,7 +23,7 @@ Automates volume farming on Hyperliquid to reach **100,000 USDC traded volume**.
 
 ## Requirements
 - Hyperliquid account funded (works from ≈ **100 USDC** ; expect ~**20–40 USDC** costs to hit 100k volume, no matter what is your initial capital).
-- Freqtrade + Docker installed.
+- Docker installed.
 - `walletAddress` and `privateKey` configured in `user_data/config.json`.
 
 ## Quick start
