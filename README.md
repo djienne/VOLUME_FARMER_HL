@@ -2,7 +2,7 @@
 
 > ⚠️ **BIG WARNING:** This bot **will lose money** (fees/slippage) and **is NOT intended to make profits**. It is solely to **farm trading volume**. Use at your own risk. *Not financial advice.*
 
-Youtube video link to be provided soon.
+Youtube video link presenting this Freqtrade strategy: [to be provided soon].
 
 ## What it does
 Automates volume farming on Hyperliquid to reach **100,000 USDC traded volume**. Once the target is reached (or the API check fails), the bot **halts automatically**.
