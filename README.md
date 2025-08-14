@@ -24,7 +24,7 @@ Automates volume farming on Hyperliquid to reach **100,000 USDC traded volume**.
 ## Requirements
 - Hyperliquid account funded (works from ≈ **100 USDC** ; expect ~**20–40 USDC** costs to hit 100k volume, no matter what is your initial capital).
 - Docker installed.
-- `walletAddress` and `privateKey` configured in `user_data/config.json`.
+- `walletAddress` (Address of your EVM Wallet) and `privateKey` (generated in Hyperliquid More->API) configured in `user_data/config.json`.
 
 ## Quick start
 ```bash
