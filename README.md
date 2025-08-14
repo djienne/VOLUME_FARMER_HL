@@ -1,4 +1,4 @@
-# VOLUME_FARMER – Freqtrade Strategy for Hyperliquid Volume Farming
+# VOLUME_FARMER – Freqtrade Strategy for Volume Farming on Hyperliquid 
 
 > ⚠️ **BIG WARNING:** This bot **will lose money** (fees/slippage) and **is NOT intended to make profits**. It is solely to **farm trading volume**. Use at your own risk. *Not financial advice.*
 
