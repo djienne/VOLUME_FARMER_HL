@@ -29,7 +29,7 @@ Automates volume farming on Hyperliquid to reach **100,000 USDC traded volume**.
 ## Quick start
 ```bash
 # Clone repo / place strategy
-# Put API keys. Youtube video link to be provided soon.
+# Copy/paste both API keys inside config.json.
 
 # Build & run
 docker compose build
