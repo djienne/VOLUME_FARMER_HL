@@ -40,5 +40,5 @@ docker compose up
 - **Limit orders @ order book top** to stay maker and get filled fast.
 - Single-position logic; try to maker exit immediately after entries to churn volume.
 - Monitor progress on Hyperliquid portfolio and `volume_spammer.log`.
-- Use **short-lived API keys** (few days) for safety.
+- Use **short-lived Private Hyperliquid API key** (few days) for safety.
 
