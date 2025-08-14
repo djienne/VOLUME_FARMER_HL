@@ -10,7 +10,9 @@ Automates volume farming on Hyperliquid to reach **100,000 USDC traded volume**.
 ## Why it matters
 🎯 **WHY IS THIS IMPORTANT?**  
 ✅ Unlocks sub-accounts on Hyperliquid  
+
 ✅ Grants “Institutional” status on Liminal for an easy to use Delta Neutral strategy (positions executed on your account), profitability ~5-40% APR
+
 ✅ Increases your chances for a future Hyperliquid airdrop and potentially other ecosystem projects  
 
 ## How it works (very short)
