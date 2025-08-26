@@ -179,7 +179,6 @@ class VOLUME_FARMER(IStrategy):
             if self.total_vol>100_000 or self.total_vol is None or self.is_working == False:
                 dataframe['signal'] = 0
                 write_log(f"Total traded volume is above 100_000 USDC: the bot does not need to do anything. Or it could be a default in the API call.")
-                raise SystemExit("Manual abort triggered from strategy.")
             else:
                 dataframe['signal'] = 1 # always enter ASAP if total traded volume is below 100k
                 write_log(f"Total traded volume is below 100_000 USDC: continuing on {metadata['pair']}...  leverage = {self.LEVERAGE_val}")
@@ -220,5 +219,6 @@ class VOLUME_FARMER(IStrategy):
         lev = min(self.LEVERAGE_val, max_leverage)
 
         return lev
+
 
 
