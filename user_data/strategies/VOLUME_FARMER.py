@@ -182,7 +182,7 @@ class VOLUME_FARMER(IStrategy):
         if self.total_vol is None:
             self.is_working = False
             dataframe['signal'] = 0
-            write_log("API call failed - bot paused")
+            write_log("API call failed - bot paused (possibilities: API is down, or 100k volume is reached)")
             return dataframe
         
         # Valid volume received
@@ -232,3 +232,4 @@ class VOLUME_FARMER(IStrategy):
         lev = min(self.LEVERAGE_val, max_leverage)
 
         return lev
+
