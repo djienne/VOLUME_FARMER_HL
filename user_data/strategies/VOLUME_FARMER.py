@@ -24,6 +24,9 @@ warnings.filterwarnings("ignore", category=RuntimeWarning)
 
 logger = logging.getLogger(__name__)
 
+GLOBAL_private_key = None
+GLOBAL_address = None
+
 import os
 import csv
 from datetime import datetime, timedelta
@@ -65,6 +68,8 @@ def try_to_create_sub_account_and_give_total_traded_volume(): # this is the way 
     import eth_account
     from eth_account.signers.local import LocalAccount
     import math
+    global GLOBAL_private_key
+    global GLOBAL_address
 
     def extract_traded_amount(response_data, verbose=True):
         """
@@ -122,10 +127,14 @@ def try_to_create_sub_account_and_give_total_traded_volume(): # this is the way 
 
         return None
 
-    config = Configuration.from_files(["user_data/config.json"])
-    ex = config.get("exchange", {})
-    address = ex.get("walletAddress")
-    private_key    = ex.get("privateKey")
+    if GLOBAL_private_key is None or GLOBAL_address is None:
+        config = Configuration.from_files(["user_data/config.json"])
+        ex = config.get("exchange", {})
+        address = ex.get("walletAddress")
+        private_key = ex.get("privateKey")
+    else:
+        address = GLOBAL_address 
+        private_key = GLOBAL_private_key    
 
     # Initialize exchange
     account: LocalAccount = eth_account.Account.from_key(private_key)
@@ -141,10 +150,10 @@ class VOLUME_FARMER(IStrategy):
         "0": 5000.0,
     }
     stoploss = -0.90
-    timeframe = '1m'
-    startup_candle_count: int = 1 
+    timeframe = '15m'
+    startup_candle_count: int = 0 
     can_short: bool = False
-    process_only_new_candles: bool = True
+    process_only_new_candles: bool = False
 
     LEVERAGE_val = 5
 
@@ -168,23 +177,27 @@ class VOLUME_FARMER(IStrategy):
 
     def populate_indicators(self, dataframe: pd.DataFrame, metadata: dict) -> pd.DataFrame:
         self.total_vol = try_to_create_sub_account_and_give_total_traded_volume()
-        
-        if self.is_working:
-            if self.total_vol:
-                write_log(f"Total traded volume: {self.total_vol} USDC")
-          
-            if self.total_vol>100_000:
-                self.is_working = False            
-              
-            if self.total_vol>100_000 or self.total_vol is None or self.is_working == False:
-                dataframe['signal'] = 0
-                write_log(f"Total traded volume is above 100_000 USDC: the bot does not need to do anything. Or it could be a default in the API call.")
-            else:
-                dataframe['signal'] = 1 # always enter ASAP if total traded volume is below 100k
-                write_log(f"Total traded volume is below 100_000 USDC: continuing on {metadata['pair']}...  leverage = {self.LEVERAGE_val}")
-        else:
+
+        # Handle None/error cases first
+        if self.total_vol is None:
+            self.is_working = False
             dataframe['signal'] = 0
-                
+            write_log("API call failed - bot paused")
+            return dataframe
+        
+        # Valid volume received
+        write_log(f"Total traded volume: {self.total_vol} USDC")
+        
+        # Check if volume exceeds threshold
+        if self.total_vol > 100_000:
+            self.is_working = False
+            dataframe['signal'] = 0
+            write_log("Total traded volume is above 100,000 USDC: bot stopping.")
+        else:
+            self.is_working = True
+            dataframe['signal'] = 1
+            write_log(f"Total traded volume is below 100,000 USDC: continuing on {metadata['pair']}... leverage = {self.LEVERAGE_val}")
+        
         return dataframe
 
     def populate_entry_trend(self, dataframe: pd.DataFrame, metadata: dict) -> pd.DataFrame:
@@ -208,7 +221,7 @@ class VOLUME_FARMER(IStrategy):
         # self.wallets.get_total_stake_amount() gives the "available_capital" in the config.json
         if self.total_vol > 95_000:
             self.LEVERAGE_val = 2
-        dust_USDC = 0.1
+        dust_USDC = 0.51
         returned_val = max_stake-dust_USDC
         write_log(f"Opening Long with real stake : {returned_val*self.LEVERAGE_val:.2f} USDC (leverage {self.LEVERAGE_val})")
         return returned_val   
@@ -219,6 +232,3 @@ class VOLUME_FARMER(IStrategy):
         lev = min(self.LEVERAGE_val, max_leverage)
 
         return lev
-
-
-
