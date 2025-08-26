@@ -170,7 +170,6 @@ class VOLUME_FARMER(IStrategy):
         self.total_vol = try_to_create_sub_account_and_give_total_traded_volume()
         
         if self.is_working:
-            self.total_vol = try_to_create_sub_account_and_give_total_traded_volume()
             if self.total_vol:
                 write_log(f"Total traded volume: {self.total_vol} USDC")
           
@@ -221,3 +220,4 @@ class VOLUME_FARMER(IStrategy):
         lev = min(self.LEVERAGE_val, max_leverage)
 
         return lev
+
