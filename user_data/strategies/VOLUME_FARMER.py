@@ -150,7 +150,7 @@ class VOLUME_FARMER(IStrategy):
 
     # state variables, do not touch
     is_working = True
-    total_vol = True
+    total_vol = 0
 
     # Optional order type mapping.
     order_types = {
@@ -220,4 +220,5 @@ class VOLUME_FARMER(IStrategy):
         lev = min(self.LEVERAGE_val, max_leverage)
 
         return lev
+
 
