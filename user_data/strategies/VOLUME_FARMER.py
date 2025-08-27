@@ -221,7 +221,7 @@ class VOLUME_FARMER(IStrategy):
         # self.wallets.get_total_stake_amount() gives the "available_capital" in the config.json
         if self.total_vol is None:
             self.is_working = False
-            return 0.0
+            return None
         if self.total_vol > 95_000:
             self.LEVERAGE_val = 2
         dust_USDC = 0.51
@@ -235,5 +235,6 @@ class VOLUME_FARMER(IStrategy):
         lev = min(self.LEVERAGE_val, max_leverage)
 
         return lev
+
 
 
