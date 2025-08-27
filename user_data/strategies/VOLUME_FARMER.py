@@ -219,6 +219,9 @@ class VOLUME_FARMER(IStrategy):
                             **kwargs) -> float:
         # max_stake and self.GET_AVAILABLE_PERP() give the same thing: amount available for trade in the hyperliquid perp account
         # self.wallets.get_total_stake_amount() gives the "available_capital" in the config.json
+        if self.total_vol is None:
+            self.is_working = False
+            return 0.0
         if self.total_vol > 95_000:
             self.LEVERAGE_val = 2
         dust_USDC = 0.51
@@ -232,4 +235,5 @@ class VOLUME_FARMER(IStrategy):
         lev = min(self.LEVERAGE_val, max_leverage)
 
         return lev
+
 
