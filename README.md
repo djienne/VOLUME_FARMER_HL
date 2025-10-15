@@ -16,8 +16,8 @@ Automates volume farming on Hyperliquid to reach **100,000 USDC traded volume**.
 ✅ Increases your chances for a future Hyperliquid airdrop and potentially other ecosystem projects  
 
 **💰 Support this project**:
-- **Hyperliquid**: Sign up with [this referral link](https://app.hyperliquid.xyz/join/FREQTRADE) for 10% fee reduction
-- **Liminal**: Liminal, to run a Delta-Neutral strategy easily (5-40% APR), [referral link](https://liminal.money/join/FREQTRADE)
+- 💰 **Hyperliquid**: Sign up with [this referral link](https://app.hyperliquid.xyz/join/FREQTRADE) for 10% fee reduction
+- 🌊 **Liminal**: Liminal, to run a Delta-Neutral strategy easily (5-40% APR), [referral link](https://liminal.money/join/FREQTRADE)
 
 ## How it works (very short)
 - Trades **PAXG/USDC Perp** with **limit orders only** (maker fees).
