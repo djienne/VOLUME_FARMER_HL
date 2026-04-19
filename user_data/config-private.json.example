@@ -1,0 +1,11 @@
+{
+    "exchange": {
+        "walletAddress": "",
+        "privateKey": ""
+    },
+    "api_server": {
+        "jwt_secret_key": "",
+        "username": "",
+        "password": ""
+    }
+}

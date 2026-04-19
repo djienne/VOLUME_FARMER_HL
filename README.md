@@ -28,13 +28,27 @@ Automates volume farming on Hyperliquid to reach **100,000 USDC traded volume**.
 ## Requirements
 - Hyperliquid account funded (works from ≈ **100 USDC** ; expect ~**20–40 USDC** costs to hit 100k volume, no matter what is your initial capital).
 - Docker installed.
-- `walletAddress` (Address of your EVM Wallet) and `privateKey` (generated in Hyperliquid More->API) configured in `user_data/config.json`.
+- `walletAddress` (Address of your EVM Wallet) and `privateKey` (generated in Hyperliquid More->API).
+
+## Setup
+Secrets live in a separate, **gitignored** file so they can never be committed by accident.
+
+```bash
+# 1. Copy the template
+cp user_data/config-private.json.example user_data/config-private.json
+
+# 2. Edit user_data/config-private.json and paste:
+#      - walletAddress : your EVM wallet address
+#      - privateKey    : Hyperliquid API private key (More -> API)
+#    Only enable api_server fields if you plan to expose the REST API;
+#    generate a fresh jwt_secret_key with:
+#      python -c "import secrets; print(secrets.token_hex(32))"
+```
+
+`docker-compose.yml` already layers both configs (`--config config.json --config config-private.json`), so the private file overrides just the secret fields and leaves the public pair/whitelist config alone.
 
 ## Quick start
 ```bash
-# Clone repo / place strategy
-# Copy/paste both API keys inside config.json.
-
 # Build & run
 docker compose build
 docker compose up
