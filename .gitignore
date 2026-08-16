@@ -9,3 +9,10 @@ user_data/data/
 user_data/strategies/volume_spammer.log
 __pycache__/
 *.pyc
+
+# Secrets — the real .env must never be committed.
+.env
+.env.*
+
+# ...but the placeholder template must stay tracked.
+!.env.example
